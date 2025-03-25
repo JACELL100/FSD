@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        lilita: ["Lilita One", "cursive"],
+        orbitron: ['Orbitron', 'sans-serif'],
+        smooch: ['Smooch Sans', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
