@@ -1,5 +1,28 @@
 import React, { useState } from "react";
-import { FaPlus, FaTrash, FaGithub, FaExternalLinkAlt, FaCheck, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaPlus, FaTrash, FaGithub, FaExternalLinkAlt, FaCheck, FaChevronDown, FaChevronUp, FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
+// Notification Component
+const Notification = ({ message, type = "success", onClose }) => {
+  return (
+    <div 
+      className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transition-all duration-300 
+        ${type === "success" ? "bg-green-900 border-green-700" : "bg-red-900 border-red-700"} 
+        text-white flex items-center justify-between`}
+    >
+      <div className="flex items-center gap-3">
+        {type === "success" ? <FaCheck className="text-green-400" /> : <FaTimes className="text-red-400" />}
+        <span>{message}</span>
+      </div>
+      <button 
+        onClick={onClose} 
+        className="ml-4 hover:text-gray-300"
+      >
+        <FaTimes />
+      </button>
+    </div>
+  );
+};
 
 export default function ProjectUploadForm() {
   const [media, setMedia] = useState([]);
@@ -7,6 +30,8 @@ export default function ProjectUploadForm() {
   const [sdgs, setSdgs] = useState([]);
   const [teammates, setTeammates] = useState([]);
   const [mentor, setMentor] = useState("");
+  const [notification, setNotification] = useState(null);
+  const [category, setCategory] = useState("");
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -61,7 +86,8 @@ export default function ProjectUploadForm() {
     // Other Technologies  
     "GraphQL", "REST API", "gRPC", "RabbitMQ", "Kafka",  
     "Selenium", "Jest", "Cypress", "OpenAI API",  
-    "Arduino", "Raspberry Pi",  ];
+    "Arduino", "Raspberry Pi" ];
+
   const availableSDGs = ["No Poverty",
   "Zero Hunger",
   "Good Health and Well-being",
@@ -79,6 +105,8 @@ export default function ProjectUploadForm() {
   "Life on Land",
   "Peace, Justice, and Strong Institutions",
   "Partnerships for the Goals"];
+
+  const navigate = useNavigate();
 
   const handleMediaUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -125,10 +153,14 @@ export default function ProjectUploadForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     // Validate form fields
     if (!form.title || !form.description || media.length === 0) {
-      alert("Please fill in all required fields and upload at least one media file.");
-      return;
+      setNotification({
+        message: "Please fill in all required fields and upload at least one media file.",
+        type: "error"
+      });
+      return; // Prevents redirection on validation failure
     }
 
     // Prepare submission data
@@ -142,8 +174,28 @@ export default function ProjectUploadForm() {
     };
 
     console.log("Submitted Project Data:", submissionData);
-    // Here you would typically send the data to a backend API
-    alert("Your project has been submitted to the Admin .Status Pending");
+
+    // Show success notification
+    setNotification({
+      message: "Your project has been submitted to the Admin. Status Pending",
+      type: "success"
+    });
+
+    // Auto-dismiss notification after 5 seconds
+    setTimeout(() => {
+      setNotification(null);
+    }, 5000);
+
+    // Redirect to home after 2 seconds
+    setTimeout(() => {
+      navigate("/home");
+    }, 2500);
+};
+
+
+  // Close notification manually
+  const closeNotification = () => {
+    setNotification(null);
   };
 
   // Function to render tech stack or SDGs with expand/collapse
@@ -202,7 +254,16 @@ export default function ProjectUploadForm() {
   };
 
   return (
-    <div className="min-h-screen px-10 py-16 bg-gray-900 text-white pt-24">
+    <div className="min-h-screen px-10 py-16 bg-gray-900 text-white pt-24 relative">
+      {/* Notification Component */}
+      {notification && (
+        <Notification 
+          message={notification.message} 
+          type={notification.type}
+          onClose={closeNotification}
+        />
+      )}
+
       <h2 className="text-4xl font-bold font-lilita text-center text-amber-400 mb-8">Upload Your Project</h2>
       <form onSubmit={handleSubmit} className="max-w-6xl mx-auto p-8 bg-gray-800 font-smooch font-bold text-xl tracking-wide leading-relaxed rounded-2xl shadow-lg border border-amber-400">
         <div className="grid font-smooch font-bold text-lg grid-cols-2 gap-6">
@@ -279,6 +340,31 @@ export default function ProjectUploadForm() {
           'bg-green-500',
           'border-green-400'
         )}
+
+        {/* Project Category SELEction */}
+
+        <div className="mt-4">
+            <h1 className="text-xl font-semibold text-white mb-2">Select Project Category</h1>
+            <select 
+                className="w-full p-3 border border-blue-400 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+            >
+                <option value="">Select a category</option>
+                <option value="Game">Game</option>
+                <option value="Website">Website</option>
+                <option value="Video">Video</option>
+                <option value="Documentary">Documentary</option>
+                <option value="Digital Art">Digital Art</option>
+            </select>
+
+            {category && (
+                <p className="mt-2 text-lg text-green-600 font-medium">
+                    Selected Category: {category}
+                </p>
+            )}
+        </div>
 
         {/* Teammates & Mentor */}
         <div className="mt-6 grid grid-cols-2 gap-6">

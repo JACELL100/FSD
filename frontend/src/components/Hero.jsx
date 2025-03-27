@@ -121,7 +121,7 @@ export default function Hero() {
 
       {/* Animated Text Overlay */}
       <motion.div
-        className="relative z-10 text-center text-white px-6 py-4 rounded-lg bg-black bg-opacity-40 shadow-2xl"
+        className="relative z-10 text-center text-white px-6 py-4 rounded-lg bg-black bg-opacity-80 shadow-2xl"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
