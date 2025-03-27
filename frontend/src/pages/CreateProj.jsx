@@ -36,9 +36,7 @@ export default function ProjectUploadForm() {
     title: "",
     description: "",
     github: "",
-    hostedLink: "",
-    newTeammate: "",
-    newMentor: ""
+    hostedLink: ""
   });
   
   // New state for expandable sections
