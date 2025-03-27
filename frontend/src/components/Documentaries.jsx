@@ -112,7 +112,7 @@ const Documentaries = () => {
       className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-fit p-8"
     >
       <div className="relative z-10">
-        <h1 className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
+        <h1 className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-12">
           📄 Documentary Innovation Hub
         </h1>
 
@@ -248,7 +248,7 @@ const Documentaries = () => {
                       onClick={() => viewDetails(doc.id)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium flex items-center justify-center"
+                      className="flex-1 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium flex items-center justify-center"
                     >
                       View Details
                       <Globe size={16} className="ml-2" />

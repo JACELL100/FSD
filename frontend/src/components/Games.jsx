@@ -6,6 +6,7 @@ import {
   ArrowUpDown,
   Heart,
   ExternalLink,
+  Globe,
   Code,
   PlayCircle,
 } from "lucide-react";
@@ -113,8 +114,6 @@ const Games = () => {
       transition={{ duration: 0.5 }}
       className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-fit p-8"
     >
-      
-
       <div className="relative z-10">
         <h1 className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
           🎮 Game Innovation Hub
@@ -198,8 +197,6 @@ const Games = () => {
               onMouseLeave={() => setHoveredGame(null)}
               className="relative group perspective-1000"
             >
-              
-
               <div className="relative bg-gray-800/60 backdrop-blur-lg rounded-2xl overflow-hidden shadow-2xl border border-white/10 transform transition-all duration-300 group-hover:scale-[1.03] group-hover:rotate-1 origin-center">
                 {/* Game Thumbnail with Zoom Effect */}
                 <div className="relative overflow-hidden">
@@ -255,7 +252,7 @@ const Games = () => {
                       className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium flex items-center justify-center"
                     >
                       View Details
-                      
+                      <Globe size={16} className="ml-2" />
                     </motion.button>
 
                     <div className="relative group/project">

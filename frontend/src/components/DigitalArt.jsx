@@ -249,7 +249,7 @@ const DigitalArt = () => {
                       onClick={() => viewDetails(art.id)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium flex items-center justify-center"
+                      className="flex-1 bg-violet-500 hover:bg-violet-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium flex items-center justify-center"
                     >
                       View Details
                       <Globe size={16} className="ml-2" />
