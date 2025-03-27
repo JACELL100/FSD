@@ -22,7 +22,6 @@ import {
   BarChart2,
   PieChart,
 } from "lucide-react";
-import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 const AdminDashboard = () => {
@@ -32,11 +31,6 @@ const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSDG, setSelectedSDG] = useState("all");
   const [expandedProject, setExpandedProject] = useState(null);
-  const [notification, setNotification] = useState({
-    title: "",
-    message: "",
-    isOpen: false,
-  });
 
   // Sample data initialization
   useEffect(() => {
@@ -115,10 +109,6 @@ const AdminDashboard = () => {
     );
   };
 
-  const sendNotification = () => {
-    setNotification({ ...notification, isOpen: false });
-    alert(`Notification sent: ${notification.title}`);
-  };
 
   const filteredProjects = projects.filter((project) => {
     const matchesSearch =
@@ -368,255 +358,6 @@ const AdminDashboard = () => {
           </div>
         );
 
-      case "leaderboard":
-        return (
-          <div className="bg-white/5 rounded-xl p-6 shadow-lg">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-white">
-                Project Leaderboard
-              </h3>
-              <div className="flex space-x-3">
-                <button className="px-3 py-1.5 bg-gray-800 rounded-lg text-white hover:bg-gray-700 transition-colors">
-                  This Month
-                </button>
-                <button className="px-3 py-1.5 bg-gray-800 rounded-lg text-white hover:bg-gray-700 transition-colors">
-                  All Time
-                </button>
-                <button className="px-3 py-1.5 bg-purple-600 rounded-lg text-white hover:bg-purple-700 transition-colors flex items-center space-x-1">
-                  <Download size={16} />
-                  <span>Export</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Top Projects */}
-              <div className="bg-gray-800/50 rounded-xl p-6 col-span-2">
-                <h4 className="text-lg font-medium text-white mb-4">
-                  Top Rated Projects
-                </h4>
-                <div className="space-y-4">
-                  {[1, 2, 3, 4, 5].map((rank) => (
-                    <div
-                      key={rank}
-                      className="flex items-center bg-gray-700/30 rounded-lg p-4 hover:bg-gray-700/50 transition-colors"
-                    >
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center mr-4 ${
-                          rank === 1
-                            ? "bg-yellow-500/20 text-yellow-400"
-                            : rank === 2
-                            ? "bg-gray-500/20 text-gray-400"
-                            : rank === 3
-                            ? "bg-amber-700/20 text-amber-500"
-                            : "bg-gray-600/20 text-gray-300"
-                        }`}
-                      >
-                        {rank}
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="text-white font-medium">
-                          Project Title {rank}
-                        </h5>
-                        <p className="text-sm text-gray-400">
-                          by Author {rank}
-                        </p>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Trophy
-                          className={`${
-                            rank === 1
-                              ? "text-yellow-400"
-                              : rank === 2
-                              ? "text-gray-400"
-                              : rank === 3
-                              ? "text-amber-500"
-                              : "text-transparent"
-                          }`}
-                        />
-                        <span className="text-white">{5 - rank * 0.2}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Statistics */}
-              <div className="space-y-6">
-                <div className="bg-gray-800/50 rounded-xl p-6">
-                  <h4 className="text-lg font-medium text-white mb-4">
-                    Engagement Stats
-                  </h4>
-                  <div className="flex justify-between items-center">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-purple-400">
-                        142
-                      </div>
-                      <div className="text-sm text-gray-400">Projects</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-blue-400">
-                        3.2K
-                      </div>
-                      <div className="text-sm text-gray-400">Views</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-green-400">
-                        576
-                      </div>
-                      <div className="text-sm text-gray-400">Ratings</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gray-800/50 rounded-xl p-6">
-                  <h4 className="text-lg font-medium text-white mb-4">
-                    Top SDGs
-                  </h4>
-                  <div className="space-y-3">
-                    {[13, 4, 7].map((sdg, index) => (
-                      <div key={sdg} className="flex items-center">
-                        <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${
-                            index === 0
-                              ? "bg-green-500/20 text-green-400"
-                              : index === 1
-                              ? "bg-blue-500/20 text-blue-400"
-                              : "bg-yellow-500/20 text-yellow-400"
-                          }`}
-                        >
-                          {sdg}
-                        </div>
-                        <div className="flex-1">
-                          <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div
-                              className={`h-full ${
-                                index === 0
-                                  ? "bg-green-500"
-                                  : index === 1
-                                  ? "bg-blue-500"
-                                  : "bg-yellow-500"
-                              }`}
-                              style={{ width: `${100 - index * 20}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                        <div className="text-sm text-gray-300 ml-3">
-                          {100 - index * 20}%
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "notifications":
-        return (
-          <div className="bg-white/5 rounded-xl p-6 shadow-lg">
-            <h3 className="text-xl font-semibold text-white mb-6">
-              Notifications & Alerts
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Send Notification */}
-              <div className="bg-gray-800/50 rounded-xl p-6">
-                <h4 className="text-lg font-medium text-white mb-4">
-                  Send Platform Notification
-                </h4>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm text-gray-400 mb-1">
-                      Title
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-2 bg-gray-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
-                      value={notification.title}
-                      onChange={(e) =>
-                        setNotification({
-                          ...notification,
-                          title: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm text-gray-400 mb-1">
-                      Message
-                    </label>
-                    <textarea
-                      className="w-full px-4 py-2 bg-gray-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600 min-h-[100px]"
-                      value={notification.message}
-                      onChange={(e) =>
-                        setNotification({
-                          ...notification,
-                          message: e.target.value,
-                        })
-                      }
-                    ></textarea>
-                  </div>
-                  <button
-                    onClick={sendNotification}
-                    className="flex items-center space-x-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white transition-colors"
-                  >
-                    <Send size={16} />
-                    <span>Send Notification</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Notification History */}
-              <div className="bg-gray-800/50 rounded-xl p-6">
-                <h4 className="text-lg font-medium text-white mb-4">
-                  Recent Notifications
-                </h4>
-                <div className="space-y-3">
-                  {[
-                    {
-                      id: 1,
-                      title: "Submission Deadline",
-                      message: "Final project submissions due Friday",
-                      date: "2023-10-10",
-                    },
-                    {
-                      id: 2,
-                      title: "System Maintenance",
-                      message: "Platform will be down for updates on Sunday",
-                      date: "2023-10-05",
-                    },
-                    {
-                      id: 3,
-                      title: "New Feature",
-                      message: "Check out the new project rating system",
-                      date: "2023-09-28",
-                    },
-                  ].map((notif) => (
-                    <div
-                      key={notif.id}
-                      className="p-3 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-colors"
-                    >
-                      <div className="flex justify-between items-start">
-                        <h5 className="text-white font-medium">
-                          {notif.title}
-                        </h5>
-                        <span className="text-xs text-gray-500">
-                          {notif.date}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-400 mt-1">
-                        {notif.message}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
       case "reports":
         return (
           <div className="bg-white/5 rounded-xl p-6 shadow-lg">
@@ -747,7 +488,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
-
       {/* Dashboard Content */}
       <div className="relative z-10">
         {/* Header */}
@@ -799,30 +539,6 @@ const AdminDashboard = () => {
               >
                 <FileCheck size={18} />
                 <span>Project Moderation</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab("leaderboard")}
-                className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
-                  activeTab === "leaderboard"
-                    ? "bg-purple-600 text-white"
-                    : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                }`}
-              >
-                <Trophy size={18} />
-                <span>Leaderboard</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab("notifications")}
-                className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
-                  activeTab === "notifications"
-                    ? "bg-purple-600 text-white"
-                    : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                }`}
-              >
-                <Bell size={18} />
-                <span>Notifications</span>
               </button>
 
               <button
