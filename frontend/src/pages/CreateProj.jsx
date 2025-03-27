@@ -170,7 +170,8 @@ export default function ProjectUploadForm() {
       techStack,
       sdgs,
       teammates,
-      mentor
+      mentor,
+      category
     };
 
     console.log("Submitted Project Data:", submissionData);
