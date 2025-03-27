@@ -7,9 +7,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        boldonse: ["Boldonse", "sans-serif"],
         lilita: ["Lilita One", "cursive"],
-        orbitron: ['Orbitron', 'sans-serif'],
-        smooch: ['Smooch Sans', 'sans-serif'],
+        orbitron: ["Orbitron", "sans-serif"],
+        smooch: ["Smooch Sans", "sans-serif"],
       },
     },
   },

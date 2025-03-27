@@ -20,7 +20,7 @@ const Navbar = () => {
           >
             <Grid className="text-white" size={24} />
           </motion.div>
-          <h1 className="text-2xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-500 to-teal-400 text-transparent bg-clip-text font-boldonse">
             Project Portal
           </h1>
         </div>

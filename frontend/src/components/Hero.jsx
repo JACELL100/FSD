@@ -4,6 +4,14 @@ import { motion } from "framer-motion";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 
+
+
+
+
+
+
+
+
 export default function Hero() {
   const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine);
