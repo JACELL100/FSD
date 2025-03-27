@@ -26,6 +26,7 @@ const gamesData = [
     githubLink: "https://github.com/username/snake-multiplayer",
     hostedLink: "https://snake-game.example.com",
     likes: 42,
+    userHasLiked: false,
   },
   {
     id: 2,
@@ -41,6 +42,7 @@ const gamesData = [
     hostedLink: "https://climate-sim.example.com",
     likes: 78,
     userRating: null,
+    userHasLiked: false,
   },
   {
     id: 3,
@@ -57,6 +59,7 @@ const gamesData = [
     hostedLink: "https://space-game.example.com",
     likes: 35,
     userRating: null,
+    userHasLiked: false,
   },
 ];
 
@@ -72,7 +75,13 @@ const Games = () => {
   const handleLike = (gameId) => {
     setGames((prevGames) =>
       prevGames.map((game) =>
-        game.id === gameId ? { ...game, likes: game.likes + 1 } : game
+        game.id === gameId
+          ? {
+              ...game,
+              likes: game.userHasLiked ? game.likes - 1 : game.likes + 1,
+              userHasLiked: !game.userHasLiked,
+            }
+          : game
       )
     );
   };
@@ -236,7 +245,7 @@ const Games = () => {
                     >
                       <Heart
                         size={18}
-                        fill={game.likes > 0 ? "currentColor" : "none"}
+                        fill={game.userHasLiked ? "currentColor" : "none"}
                         className="mr-1"
                       />
                       {game.likes}

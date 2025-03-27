@@ -25,6 +25,7 @@ const digitalArtData = [
     githubLink: "https://github.com/username/climate-visualization",
     hostedLink: "https://climate-art.example.com",
     likes: 42,
+    userHasLiked: false,
   },
   {
     id: 2,
@@ -40,6 +41,7 @@ const digitalArtData = [
     githubLink: "https://github.com/username/interconnected-communities",
     hostedLink: "https://global-unity-art.example.com",
     likes: 78,
+    userHasLiked: false,
   },
   {
     id: 3,
@@ -55,6 +57,7 @@ const digitalArtData = [
     githubLink: "https://github.com/username/future-education-art",
     hostedLink: "https://edtech-visualization.example.com",
     likes: 35,
+    userHasLiked: false,
   },
 ];
 
@@ -69,7 +72,13 @@ const DigitalArt = () => {
   const handleLike = (artId) => {
     setArtworks((prevArtworks) =>
       prevArtworks.map((art) =>
-        art.id === artId ? { ...art, likes: art.likes + 1 } : art
+        art.id === artId
+          ? {
+              ...art,
+              likes: art.userHasLiked ? art.likes - 1 : art.likes + 1,
+              userHasLiked: !art.userHasLiked,
+            }
+          : art
       )
     );
   };
@@ -236,7 +245,7 @@ const DigitalArt = () => {
                     >
                       <Heart
                         size={18}
-                        fill={art.likes > 0 ? "currentColor" : "none"}
+                        fill={art.userHasLiked ? "currentColor" : "none"}
                         className="mr-1"
                       />
                       {art.likes}

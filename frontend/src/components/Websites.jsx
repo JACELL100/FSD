@@ -25,6 +25,7 @@ const websitesData = [
     githubLink: "https://github.com/username/health-tracker",
     hostedLink: "https://health-tracker.example.com",
     likes: 42,
+    userHasLiked: false,
   },
   {
     id: 2,
@@ -41,6 +42,7 @@ const websitesData = [
     githubLink: "https://github.com/username/green-spaces",
     hostedLink: "https://green-spaces.example.com",
     likes: 78,
+    userHasLiked: false,
   },
   {
     id: 3,
@@ -56,6 +58,7 @@ const websitesData = [
     githubLink: "https://github.com/username/education-portal",
     hostedLink: "https://education-portal.example.com",
     likes: 35,
+    userHasLiked: false,
   },
 ];
 
@@ -72,7 +75,11 @@ const Websites = () => {
     setWebsites((prevWebsites) =>
       prevWebsites.map((website) =>
         website.id === websiteId
-          ? { ...website, likes: website.likes + 1 }
+          ? {
+              ...website,
+              likes: website.userHasLiked ? website.likes - 1 : website.likes + 1,
+              userHasLiked: !website.userHasLiked,
+            }
           : website
       )
     );
@@ -239,7 +246,7 @@ const Websites = () => {
                     >
                       <Heart
                         size={18}
-                        fill={website.likes > 0 ? "currentColor" : "none"}
+                        fill={website.userHasLiked ? "currentColor" : "none"} 
                         className="mr-1"
                       />
                       {website.likes}

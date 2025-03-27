@@ -24,6 +24,7 @@ const documentariesData = [
     githubLink: "https://github.com/username/renewable-energy-doc",
     hostedLink: "https://energy-documentary.example.com",
     likes: 42,
+    userHasLiked: false,
   },
   {
     id: 2,
@@ -39,6 +40,7 @@ const documentariesData = [
     githubLink: "https://github.com/username/digital-inclusion-doc",
     hostedLink: "https://digital-inclusion.example.com",
     likes: 78,
+    userHasLiked: false,
   },
   {
     id: 3,
@@ -54,6 +56,7 @@ const documentariesData = [
     githubLink: "https://github.com/username/water-security-doc",
     hostedLink: "https://water-security.example.com",
     likes: 35,
+    userHasLiked: false,
   },
 ];
 
@@ -68,7 +71,13 @@ const Documentaries = () => {
   const handleLike = (docId) => {
     setDocumentaries((prevDocs) =>
       prevDocs.map((doc) =>
-        doc.id === docId ? { ...doc, likes: doc.likes + 1 } : doc
+        doc.id === docId
+          ? {
+              ...doc,
+              likes: doc.userHasLiked ? doc.likes - 1 : doc.likes + 1,
+              userHasLiked: !doc.userHasLiked,
+            }
+          : doc
       )
     );
   };
@@ -235,7 +244,7 @@ const Documentaries = () => {
                     >
                       <Heart
                         size={18}
-                        fill={doc.likes > 0 ? "currentColor" : "none"}
+                        fill={doc.userHasLiked ? "currentColor" : "none"}
                         className="mr-1"
                       />
                       {doc.likes}

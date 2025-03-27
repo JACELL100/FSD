@@ -25,6 +25,7 @@ const videosData = [
     githubLink: "https://github.com/username/ocean-conservation",
     hostedLink: "https://ocean-documentary.example.com",
     likes: 42,
+    userHasLiked: false,
   },
   {
     id: 2,
@@ -40,6 +41,7 @@ const videosData = [
     githubLink: "https://github.com/username/women-in-stem",
     hostedLink: "https://stem-narratives.example.com",
     likes: 78,
+    userHasLiked: false,
   },
   {
     id: 3,
@@ -55,6 +57,7 @@ const videosData = [
     githubLink: "https://github.com/username/agriculture-insights",
     hostedLink: "https://agriculture-video.example.com",
     likes: 35,
+    userHasLiked: false,
   },
 ];
 
@@ -70,7 +73,13 @@ const Videos = () => {
   const handleLike = (videoId) => {
     setVideos((prevVideos) =>
       prevVideos.map((video) =>
-        video.id === videoId ? { ...video, likes: video.likes + 1 } : video
+        video.id === videoId
+          ? {
+              ...video,
+              likes: video.userHasLiked ? video.likes - 1 : video.likes + 1,
+              userHasLiked: !video.userHasLiked,
+            }
+          : video
       )
     );
   };
@@ -236,7 +245,7 @@ const Videos = () => {
                     >
                       <Heart
                         size={18}
-                        fill={video.likes > 0 ? "currentColor" : "none"}
+                        fill={video.userHasLiked ? "currentColor" : "none"}
                         className="mr-1"
                       />
                       {video.likes}
