@@ -1,16 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-
-
-
-
-
-
-
-
 
 export default function Hero() {
   const particlesInit = useCallback(async (engine) => {
@@ -92,8 +84,8 @@ export default function Hero() {
                 enable: true,
                 speed: 1,
                 opacity_min: 0.1,
-                sync: false
-              }
+                sync: false,
+              },
             },
             shape: {
               type: "circle",
@@ -105,16 +97,16 @@ export default function Hero() {
                 enable: true,
                 speed: 4,
                 size_min: 0.3,
-                sync: false
-              }
+                sync: false,
+              },
             },
           },
           detectRetina: true,
         }}
         style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
+          position: "absolute",
+          width: "100%",
+          height: "100%",
           zIndex: 1,
         }}
       />
@@ -131,7 +123,7 @@ export default function Hero() {
             words={[
               "Showcasing Innovation, Mapping Impact.",
               "Creative Code. Real-World Impact.",
-              "Turning Code into Change, One Project at a Time."
+              "Turning Code into Change, One Project at a Time.",
             ]}
             loop={true}
             cursor
@@ -144,19 +136,20 @@ export default function Hero() {
         <p className="text-3xl font-smooch opacity-80 mt-2">
           Explore the Intersection of Technology and Creativity
         </p>
-
-      
-
       </motion.div>
-
-    
 
       {/* Optional Gradient Animation */}
       <style jsx global>{`
         @keyframes gradientBG {
-          0% {background-position: 0% 50%}
-          50% {background-position: 100% 50%}
-          100% {background-position: 0% 50%}
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
         }
       `}</style>
     </main>
