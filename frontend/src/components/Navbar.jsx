@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate, NavLink } from "react-router-dom";
-import { Home, Grid, LogIn } from "lucide-react";
+import { useNavigate, NavLink, Link } from "react-router-dom";
+import { Home, Grid, LogIn,Award } from "lucide-react";
 import { FcIdea } from "react-icons/fc";
 
 const Navbar = () => {
@@ -77,6 +77,7 @@ const Navbar = () => {
           {[
             { name: "Home", path: "/", icon: Home },
             { name: "Projects", path: "/projects", icon: Grid },
+            { name: "Leaderboards", path: "/leaderboards", icon: Award },
           ].map((link) => (
             <NavLink
               key={link.name}
