@@ -1,16 +1,17 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Star,
-  Filter,
-  ArrowUpDown,
   Heart,
   ExternalLink,
   Globe,
-  Code,
-  PlayCircle,
+  CheckCircle,
+  Clock,
+  XCircle
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import UserProfile from "../components/UserProfile";
+import FacultyProfile from "../components/FacultyProfile";
 
 const gamesData = [
   {
@@ -27,6 +28,7 @@ const gamesData = [
     hostedLink: "https://snake-game.example.com",
     likes: 42,
     userHasLiked: false,
+    status: "approved"
   },
   {
     id: 2,
@@ -43,6 +45,7 @@ const gamesData = [
     likes: 78,
     userRating: null,
     userHasLiked: false,
+    status: "pending"
   },
   {
     id: 3,
@@ -60,15 +63,12 @@ const gamesData = [
     likes: 35,
     userRating: null,
     userHasLiked: false,
+    status: "rejected"
   },
 ];
 
-const Games = () => {
+const FacultyDashboard = () => {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState({
-    sdg: "",
-    sortBy: "ratings",
-  });
   const [games, setGames] = useState(gamesData);
   const [hoveredGame, setHoveredGame] = useState(null);
 
@@ -86,37 +86,32 @@ const Games = () => {
     );
   };
 
-  const filteredAndSortedGames = useMemo(() => {
-    let result = [...games];
-
-    // Filter and sort logic remains the same
-    if (filter.sdg) {
-      result = result.filter((game) => game.sdg === filter.sdg);
-    }
-
-    switch (filter.sortBy) {
-      case "ratings":
-        result.sort((a, b) => b.ratings - a.ratings);
-        break;
-      case "newest":
-        result.sort((a, b) => b.createdAt - a.createdAt);
-        break;
-      case "mostViewed":
-        result.sort((a, b) => b.views - a.views);
-        break;
-      case "mostLiked":
-        result.sort((a, b) => b.likes - a.likes);
-        break;
-    }
-
-    return result;
-  }, [filter, games]);
-
   const viewDetails = (gameId) => {
     navigate(`/details/${gameId}`);
   };
 
+  // Status badge configuration
+  const statusConfig = {
+    approved: {
+      icon: <CheckCircle size={16} className="mr-1" />,
+      color: "bg-green-500",
+      text: "Approved"
+    },
+    pending: {
+      icon: <Clock size={16} className="mr-1" />,
+      color: "bg-yellow-500",
+      text: "Pending"
+    },
+    rejected: {
+      icon: <XCircle size={16} className="mr-1" />,
+      color: "bg-red-500",
+      text: "Rejected"
+    }
+  };
+
   return (
+    <>
+   <FacultyProfile/>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -124,56 +119,9 @@ const Games = () => {
       className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-fit p-8 rounded-lg"
     >
       <div className="relative z-10">
-        <h1 className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
-          🎮 Game Innovation Hub
+        <h1 className="text-5xl font-bold font-lilita text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-12">
+          Your Projects 
         </h1>
-
-        {/* Filters Section */}
-        <div className="flex justify-between items-center mb-12 space-x-4">
-          <div className="flex items-center space-x-4 w-full">
-            {/* SDG Filter */}
-            <div className="relative flex-1">
-              <select
-                value={filter.sdg}
-                onChange={(e) =>
-                  setFilter((prev) => ({ ...prev, sdg: e.target.value }))
-                }
-                className="w-full bg-gray-800/80 text-white px-4 py-3 rounded-xl border border-white/10 appearance-none pr-10 focus:ring-2 focus:ring-blue-500 transition-all"
-              >
-                <option value="">All Sustainable Development Goals</option>
-                {[...new Set(gamesData.map((game) => game.sdg))].map((sdg) => (
-                  <option key={sdg} value={sdg}>
-                    {sdg}
-                  </option>
-                ))}
-              </select>
-              <Filter
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50"
-                size={24}
-              />
-            </div>
-
-            {/* Sort Filter */}
-            <div className="relative flex-1">
-              <select
-                value={filter.sortBy}
-                onChange={(e) =>
-                  setFilter((prev) => ({ ...prev, sortBy: e.target.value }))
-                }
-                className="w-full bg-gray-800/80 text-white px-4 py-3 rounded-xl border border-white/10 appearance-none pr-10 focus:ring-2 focus:ring-purple-500 transition-all"
-              >
-                <option value="ratings">Top Rated</option>
-                <option value="newest">Newest</option>
-                <option value="mostViewed">Most Viewed</option>
-                <option value="mostLiked">Most Liked</option>
-              </select>
-              <ArrowUpDown
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50"
-                size={24}
-              />
-            </div>
-          </div>
-        </div>
 
         {/* Games Grid */}
         <motion.div
@@ -191,7 +139,7 @@ const Games = () => {
             },
           }}
         >
-          {filteredAndSortedGames.map((game) => (
+          {games.map((game) => (
             <motion.div
               key={game.id}
               variants={{
@@ -206,8 +154,8 @@ const Games = () => {
               onMouseLeave={() => setHoveredGame(null)}
               className="relative group perspective-1000"
             >
-              <div className="relative bg-gray-800/60  rounded-2xl overflow-hidden shadow-2xl border border-white/10 transform transition-all duration-300 group-hover:scale-[1.03] group-hover:rotate-1 origin-center">
-                {/* Game Thumbnail with Zoom Effect */}
+              <div className="relative bg-gray-800/60 backdrop-blur-lg rounded-2xl overflow-hidden shadow-2xl border border-white/10 transform transition-all duration-300 group-hover:scale-[1.03] group-hover:rotate-1 origin-center">
+                {/* Game Thumbnail with Zoom Effect and Status Badge */}
                 <div className="relative overflow-hidden">
                   <motion.img
                     src={game.thumbnail}
@@ -216,6 +164,11 @@ const Games = () => {
                     initial={{ scale: 1 }}
                     whileHover={{ scale: 1.1 }}
                   />
+                  {/* Status Badge */}
+                  <div className={`absolute top-2 left-2 ${statusConfig[game.status].color} text-black font-bold  text-lg px-2 py-1 rounded-full flex items-center`}>
+                    {statusConfig[game.status].icon}
+                    {statusConfig[game.status].text}
+                  </div>
                 </div>
 
                 <div className="p-5 flex flex-col h-full">
@@ -300,7 +253,8 @@ const Games = () => {
         </motion.div>
       </div>
     </motion.div>
+    </>
   );
 };
 
-export default Games;
+export default FacultyDashboard;
