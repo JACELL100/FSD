@@ -7,6 +7,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import CreateProj from "./pages/CreateProj";
 import ViewDetails from "./pages/ViewDetails";
 
+import StudentDashBoardMy from "./pages/StudentDashBoardMy";
+import FacultyDashboard from "./pages/FacultyDashboard";
+
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +19,8 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/create" element={<CreateProj/>} />
+       <Route path="/student" element={<StudentDashBoardMy/>}/>
+       <Route path="/faculty" element={<FacultyDashboard/>}/>
         <Route path="/details/:id" element={<ViewDetails/>} />
         {/* Redirect all unknown URLs to Home */}
         <Route path="*" element={<Navigate to="/" replace />} />
