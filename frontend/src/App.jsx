@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import AdminDashboard from "./pages/AdminDashboard";
 import CreateProj from "./pages/CreateProj";
 import ViewDetails from "./pages/ViewDetails";
+import Leaderboards from "./pages/Leaderboards";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/create" element={<CreateProj/>} />
         <Route path="/details/:id" element={<ViewDetails/>} />
+        <Route path="/leaderboards" element={<Leaderboards/>} />
         {/* Redirect all unknown URLs to Home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

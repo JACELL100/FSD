@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate, NavLink } from "react-router-dom";
-import { Home, Grid, LogIn } from "lucide-react";
+import { useNavigate, NavLink, Link } from "react-router-dom";
+import { Home, Grid, LogIn,Award } from "lucide-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -20,9 +20,11 @@ const Navbar = () => {
           >
             <Grid className="text-white" size={24} />
           </motion.div>
-          <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-500 to-teal-400 text-transparent bg-clip-text font-boldonse">
-            Project Portal
-          </h1>
+          <Link to={"/"}>
+            <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-500 to-teal-400 text-transparent bg-clip-text font-boldonse">
+              CodeFolio
+            </h1>
+          </Link>
         </div>
 
         {/* Navigation Links - Center */}
@@ -30,6 +32,7 @@ const Navbar = () => {
           {[
             { name: "Home", path: "/", icon: Home },
             { name: "Projects", path: "/projects", icon: Grid },
+            { name: "Leaderboards", path: "/leaderboards", icon: Award },
           ].map((link) => (
             <NavLink
               key={link.name}
