@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, NavLink, Link } from "react-router-dom";
-import { Home, Grid, LogIn,Award } from "lucide-react";
+import { Home, Grid, LogIn, Award } from "lucide-react";
 import { FcIdea } from "react-icons/fc";
 
 const Navbar = () => {
@@ -13,56 +13,56 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo and Website Name - Left Side */}
         <div className="flex items-center space-x-3 group">
-  <motion.div
-    initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
-    animate={{ 
-      opacity: 1, 
-      scale: 1, 
-      rotate: 0,
-      transition: { 
-        type: "spring", 
-        stiffness: 500,
-        damping: 15,
-        mass: 0.5
-      } 
-    }}
-    whileHover={{
-      scale: 1.1,
-      rotate: [0, 5, -5, 0],
-      transition: { duration: 0.5 }
-    }}
-    className="p-2 bg-white rounded-xl shadow-lg shadow-amber-400/20 group-hover:shadow-amber-400/30 transition-all duration-300 backdrop-blur-sm bg-white/30"
-  >
-    <motion.div
-      animate={{
-        scale: [1.3, 1.1, 1],
-        transition: { 
-          repeat: Infinity, 
-          repeatType: "mirror",
-          duration: 1.7,
-          delay: 0.5
-        }
-      }}
-    >
-      <FcIdea className="text-3xl" />
-    </motion.div>
-  </motion.div>
-  
-  <motion.h1 
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ 
-      opacity: 1, 
-      x: 0,
-      transition: { 
-        delay: 0.3,
-        type: "spring",
-        stiffness: 300
-      }
-    }}
-    className="text-3xl font-delius font-extrabold bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 text-transparent bg-clip-text  tracking-tighter"
-  >
-    BrightBuilds
-    {/* <motion.span
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              rotate: 0,
+              transition: {
+                type: "spring",
+                stiffness: 500,
+                damping: 15,
+                mass: 0.5,
+              },
+            }}
+            whileHover={{
+              scale: 1.1,
+              rotate: [0, 5, -5, 0],
+              transition: { duration: 0.5 },
+            }}
+            className="p-2 bg-white rounded-xl shadow-lg shadow-amber-400/20 group-hover:shadow-amber-400/30 transition-all duration-300 backdrop-blur-sm bg-white/30"
+          >
+            <motion.div
+              animate={{
+                scale: [1.3, 1.1, 1],
+                transition: {
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  duration: 1.7,
+                  delay: 0.5,
+                },
+              }}
+            >
+              <FcIdea className="text-3xl" />
+            </motion.div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, x: -20 }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              transition: {
+                delay: 0.3,
+                type: "spring",
+                stiffness: 300,
+              },
+            }}
+            className="text-3xl font-delius font-extrabold bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 text-transparent bg-clip-text  tracking-tighter"
+          >
+            <Link to={"/"}>BrightBuilds</Link>
+            {/* <motion.span
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.8 }}
@@ -70,8 +70,8 @@ const Navbar = () => {
     >
       STUDENT HUB
     </motion.span> */}
-  </motion.h1>
-</div>
+          </motion.h1>
+        </div>
         {/* Navigation Links - Center */}
         <div className="flex items-center space-x-8">
           {[
