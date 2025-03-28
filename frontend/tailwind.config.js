@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        delius: ["Delius", "sans-serif"],
         boldonse: ["Boldonse", "sans-serif"],
         lilita: ["Lilita One", "cursive"],
         orbitron: ["Orbitron", "sans-serif"],
