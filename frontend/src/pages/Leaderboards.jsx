@@ -33,11 +33,11 @@ const Leaderboards = () => {
             events: {
               onClick: {
                 enable: true,
-                mode: "push",
+                mode: "pull",
               },
               onHover: {
                 enable: true,
-                mode: "repulse",
+                mode: "attract",
               },
               resize: true,
             },
