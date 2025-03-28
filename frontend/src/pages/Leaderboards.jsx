@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import PolySnow from "../components/animatedBG/PolySnow";
 
 const Leaderboards = () => {
   const [activeTab, setActiveTab] = useState("thisWeek");
 
   return (
     <div className="relative bg-gradient-to-br from-gray-900 to-black min-h-screen overflow-hidden">
+      <div className="fixed inset-0 -z-10">
+        <PolySnow />
+      </div>
       <div className="relative z-10 container mx-auto px-4 py-16">
         <motion.h1
           className="text-5xl md:text-6xl font-bold text-center mb-8 md:mb-12 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500"
