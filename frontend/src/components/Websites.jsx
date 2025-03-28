@@ -137,7 +137,7 @@ const Websites = () => {
                 onChange={(e) =>
                   setFilter((prev) => ({ ...prev, sdg: e.target.value }))
                 }
-                className="w-full bg-gray-800/80 backdrop-blur-sm text-white px-4 py-3 rounded-xl border border-white/10 appearance-none pr-10 focus:ring-2 focus:ring-blue-500 transition-all"
+                className="w-full bg-gray-800/80 text-white px-4 py-3 rounded-xl border border-white/10 appearance-none pr-10 focus:ring-2 focus:ring-blue-500 transition-all"
               >
                 <option value="">All Sustainable Development Goals</option>
                 {[...new Set(websitesData.map((website) => website.sdg))].map(
@@ -161,7 +161,7 @@ const Websites = () => {
                 onChange={(e) =>
                   setFilter((prev) => ({ ...prev, sortBy: e.target.value }))
                 }
-                className="w-full bg-gray-800/80 backdrop-blur-sm text-white px-4 py-3 rounded-xl border border-white/10 appearance-none pr-10 focus:ring-2 focus:ring-purple-500 transition-all"
+                className="w-full bg-gray-800/80 text-white px-4 py-3 rounded-xl border border-white/10 appearance-none pr-10 focus:ring-2 focus:ring-purple-500 transition-all"
               >
                 <option value="ratings">Top Rated</option>
                 <option value="newest">Newest</option>
@@ -207,7 +207,7 @@ const Websites = () => {
               onMouseLeave={() => setHoveredWebsite(null)}
               className="relative group perspective-1000"
             >
-              <div className="relative bg-gray-800/60 backdrop-blur-lg rounded-2xl overflow-hidden shadow-2xl border border-white/10 transform transition-all duration-300 group-hover:scale-[1.03] group-hover:rotate-1 origin-center">
+              <div className="relative bg-gray-800/60 rounded-2xl overflow-hidden shadow-2xl border border-white/10 transform transition-all duration-300 group-hover:scale-[1.03] group-hover:rotate-1 origin-center">
                 {/* Website Thumbnail with Zoom Effect */}
                 <div className="relative overflow-hidden">
                   <motion.img
