@@ -18,11 +18,11 @@ export default function SDGImpact() {
     whileInView={{ opacity: 1, y: 0 }} 
     viewport={{ once: true }} 
     transition={{ duration: 1.0, ease: "easeOut"  }} 
-    className="relative z-10 py-20 bg-green-400 bg-opacity-55" // Light Aqua Blue for SDG theme
+    className="relative z-10 py-20 bg-green-900 bg-opacity-55" // Light Aqua Blue for SDG theme
   >
     <div className="container mx-auto px-6 text-center">
       {/* 🔹 Section Title */}
-      <h2 className="text-4xl font-bold text-black font-lilita mb-12">SDG Impact</h2>
+      <h2 className="text-5xl font-bold text-lime-300 font-lilita mb-12">SDG Impact</h2>
   
       {/* 🔹 SDG Cards */}
       <div className="grid md:grid-cols-3 gap-8">
